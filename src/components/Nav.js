@@ -17,7 +17,9 @@ export default function Nav() {
 
         <div className="hidden md:flex items-center gap-8 text-sm text-white/60">
           <Link href="/about"    className="hover:text-teal-bio transition-colors">About</Link>
+          <Link href="/science"  className="hover:text-teal-bio transition-colors">Science</Link>
           <Link href="/research" className="hover:text-teal-bio transition-colors">Research</Link>
+          <Link href="/log"      className="hover:text-teal-bio transition-colors">Log</Link>
           <Link href="/demo"     className="hover:text-teal-bio transition-colors px-4 py-1.5 border border-teal-bio/40 rounded-full hover:border-teal-bio hover:text-teal-bio">
             Try Demo
           </Link>
@@ -37,7 +39,9 @@ export default function Nav() {
       {open && (
         <div className="md:hidden bg-ocean-deep border-t border-white/5 px-6 py-4 flex flex-col gap-4 text-sm text-white/70">
           <Link href="/about"    onClick={() => setOpen(false)} className="hover:text-teal-bio">About</Link>
+          <Link href="/science"  onClick={() => setOpen(false)} className="hover:text-teal-bio">Science</Link>
           <Link href="/research" onClick={() => setOpen(false)} className="hover:text-teal-bio">Research</Link>
+          <Link href="/log"      onClick={() => setOpen(false)} className="hover:text-teal-bio">Log</Link>
           <Link href="/demo"     onClick={() => setOpen(false)} className="hover:text-teal-bio">Try Demo</Link>
         </div>
       )}

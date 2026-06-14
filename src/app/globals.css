@@ -10,6 +10,10 @@
   --ocean-deep:    #0d1520;
   --teal-bio:      #00d4b8;
   --cyan-electric: #00b8d9;
+  --sea-surface:   #1a6b9a;
+  --sea-mid:       #0d3d6e;
+  --sea-deep:      #071428;
+  --sea-abyss:     #030810;
 }
 
 html {
@@ -17,9 +21,78 @@ html {
 }
 
 body {
-  background-color: var(--ocean-black);
+  background: linear-gradient(
+    to bottom,
+    #1e7db5 0%,
+    #1565a0 8%,
+    #0f4d88 18%,
+    #0a3872 30%,
+    #072858 45%,
+    #051c42 60%,
+    #040f2e 75%,
+    #020819 90%,
+    #010510 100%
+  );
+  background-attachment: fixed;
   color: #e8f4f8;
   font-family: 'Inter', system-ui, sans-serif;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Light beams from surface */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(175deg, rgba(100,200,255,0.07) 0%, transparent 40%),
+    linear-gradient(168deg, rgba(80,180,255,0.05) 0%, transparent 35%),
+    linear-gradient(182deg, rgba(120,210,255,0.06) 0%, transparent 45%),
+    linear-gradient(172deg, rgba(60,170,255,0.04) 0%, transparent 38%),
+    linear-gradient(178deg, rgba(140,220,255,0.05) 0%, transparent 42%);
+  background-size: 100% 100%;
+  pointer-events: none;
+  z-index: 0;
+  animation: beamshift 12s ease-in-out infinite alternate;
+}
+
+/* Caustic light shimmer near top */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 35vh;
+  background:
+    radial-gradient(ellipse 60% 30% at 25% 5%, rgba(150,230,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 20% at 70% 8%, rgba(120,210,255,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 25% at 50% 3%, rgba(180,240,255,0.05) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+  animation: caustics 8s ease-in-out infinite alternate;
+}
+
+@keyframes beamshift {
+  0%   { opacity: 0.8; transform: skewX(-0.5deg); }
+  50%  { opacity: 1;   transform: skewX(0.3deg); }
+  100% { opacity: 0.9; transform: skewX(-0.2deg); }
+}
+
+@keyframes caustics {
+  0%   { opacity: 0.6; transform: scaleX(1); }
+  50%  { opacity: 1;   transform: scaleX(1.05); }
+  100% { opacity: 0.7; transform: scaleX(0.97); }
+}
+
+/* Ensure all content sits above the beam layer */
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 h1, h2, h3, h4 {

@@ -64,7 +64,7 @@ export const metadata = {
 }
 
 // ─── GA4 Measurement ID ────────────────────────────────────────────────────────
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID || ''
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-MNB4PKHG79'
 
 export default function RootLayout({ children }) {
   return (

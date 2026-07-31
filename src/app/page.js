@@ -35,6 +35,17 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Kit signup — Cetacean Intelligence Weekly */}
+      <section className="max-w-md mx-auto px-6 -mt-4 mb-16 relative z-10">
+        <div className="kit-form-wrapper">
+          <script
+            async
+            data-uid="5feecb5399"
+            src="https://dolphinsintuitionsupabase.kit.com/5feecb5399/index.js"
+          />
+        </div>
+      </section>
+
       {/* Feature strip */}
       <section className="border-y border-white/5 bg-ocean-deep/50">
         <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">

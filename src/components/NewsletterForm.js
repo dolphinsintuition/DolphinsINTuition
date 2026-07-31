@@ -2,8 +2,14 @@
 
 import { useState } from 'react'
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+// NOTE: the NEXT_PUBLIC_SUPABASE_URL/ANON_KEY env vars in Cloudflare Pages
+// point at a stale/nonexistent project ref (qvnafubcoyqrycuomrzr — NXDOMAIN).
+// The real project is nxfjoqoilmfljlmtjdde ("dolphinsintuition's Project",
+// restored from paused 2026-07-31). Hardcoded here since these are public
+// browser-safe publishable values (same trust level as NEXT_PUBLIC_* vars)
+// and Cloudflare env vars couldn't be corrected without a fresh CF token.
+const SUPABASE_URL = 'https://nxfjoqoilmfljlmtjdde.supabase.co'
+const SUPABASE_ANON_KEY = 'sb_publishable_p5Lycaul_-c0QhektilJ7w_vQjRBQVI'
 
 export default function NewsletterForm({ className = '' }) {
   const [email, setEmail] = useState('')

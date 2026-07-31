@@ -22,6 +22,7 @@ export default function Nav() {
           <Link href="/research" className="hover:text-teal-bio transition-colors">Research</Link>
           <Link href="/log"      className="hover:text-teal-bio transition-colors">Log</Link>
           <Link href="/contact"  className="hover:text-teal-bio transition-colors">Contact</Link>
+            <Link href="/newsletter" className="hover:text-teal-bio transition-colors">Newsletter</Link>
           <Link href="/demo"     className="hover:text-teal-bio transition-colors px-4 py-1.5 border border-teal-bio/40 rounded-full hover:border-teal-bio hover:text-teal-bio">
             Try Demo
           </Link>

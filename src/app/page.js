@@ -40,8 +40,8 @@ export default function Home() {
         <div className="kit-form-wrapper">
           <script
             async
-            data-uid="5feecb5399"
-            src="https://dolphinsintuitionsupabase.kit.com/5feecb5399/index.js"
+            data-uid="748dd4c3ce"
+            src="https://dolphinsintuitionsupabase.kit.com/748dd4c3ce/index.js"
           />
         </div>
       </section>

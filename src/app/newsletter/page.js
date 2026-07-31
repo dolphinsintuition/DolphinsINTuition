@@ -1,3 +1,5 @@
+import NewsletterForm from '../../components/NewsletterForm'
+
 export const metadata = {
   title: 'Newsletter',
   description: 'Subscribe to Cetacean Intelligence Weekly — dolphin communication research, delivered to your inbox.',
@@ -17,13 +19,7 @@ export default function Newsletter() {
         straight to your inbox. No spam, unsubscribe anytime.
       </p>
       <div className="w-full max-w-md">
-        <div className="kit-form-wrapper">
-          <script
-            async
-            data-uid="748dd4c3ce"
-            src="https://dolphinsintuitionsupabase.kit.com/748dd4c3ce/index.js"
-          />
-        </div>
+        <NewsletterForm />
       </div>
     </section>
   )

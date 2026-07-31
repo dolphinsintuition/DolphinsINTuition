@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import NewsletterForm from '../components/NewsletterForm'
 
 export default function Home() {
   return (
@@ -35,15 +36,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Kit signup — Cetacean Intelligence Weekly */}
+      {/* Newsletter signup — Cetacean Intelligence Weekly */}
       <section className="max-w-md mx-auto px-6 -mt-4 mb-16 relative z-10">
-        <div className="kit-form-wrapper">
-          <script
-            async
-            data-uid="748dd4c3ce"
-            src="https://dolphinsintuitionsupabase.kit.com/748dd4c3ce/index.js"
-          />
-        </div>
+        <p className="text-white/50 text-sm mb-3 text-center">
+          Get dolphin research updates in your inbox.
+        </p>
+        <NewsletterForm />
       </section>
 
       {/* Feature strip */}

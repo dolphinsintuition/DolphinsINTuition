@@ -91,11 +91,6 @@ export default function RootLayout({ children }) {
           </>
         )}
 
-        {/* ── Kit (ConvertKit) — async, non-blocking ── */}
-        <Script
-          src="https://f.convertkit.com/ckjs/ck.5.js"
-          strategy="lazyOnload"
-        />
       </head>
       <body className="bg-ocean-black min-h-screen flex flex-col">
         <Nav />

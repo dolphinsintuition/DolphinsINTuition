@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -17,7 +17,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps) {
-  const post = getBlogPost(params.slug);
+  const { slug } = await params;
+  const post = getBlogPost(slug);
 
   if (!post) {
     return {
@@ -31,8 +32,9 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   };
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getBlogPost(params.slug);
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
 
   if (!post) {
     notFound();

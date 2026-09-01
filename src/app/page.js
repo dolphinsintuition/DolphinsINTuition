@@ -16,7 +16,7 @@ export default function Home() {
             <span className="gradient-text glow-teal">edge of language.</span>
           </h1>
           <p className="text-white/50 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            We use DolphinGemma and cutting-edge AI to decode dolphin vocalizations —
+            We use DolphinGemma and cutting-edge AI to analyse dolphin vocalisations —
             exploring one of nature's most complex communication systems.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.3s' }}>

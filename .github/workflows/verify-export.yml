@@ -1,0 +1,34 @@
+name: Verify export
+
+# The repo's other workflow only runs on push to main, so before this one a
+# pull request had NO repo-side build check at all — the only signal was
+# Cloudflare's own preview deploy, and when that broke for a config reason it
+# broke identically on every branch, which reads like the branch is fine.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify-export:
+    name: Build exports a publishable site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+      # A green `next build` is not evidence of a publishable site — it exits 0
+      # whether or not it exported anything. This is the part that decides.
+      - name: Assert the export exists and is complete
+        run: node scripts/verify-export.js

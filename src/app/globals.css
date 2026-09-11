@@ -6,14 +6,22 @@
 @tailwind utilities;
 
 :root {
-  --ocean-black:   #080c12;
-  --ocean-deep:    #0d1520;
-  --teal-bio:      #00d4b8;
-  --cyan-electric: #00b8d9;
-  --sea-surface:   #1a6b9a;
-  --sea-mid:       #0d3d6e;
-  --sea-deep:      #071428;
-  --sea-abyss:     #030810;
+  /* ── DolphinsINTuition locked brand palette (2026-09-11) ── */
+  --ocean-deep-blue:   #0D2B6B;   /* Deep Ocean Blue  — backgrounds, headers */
+  --ocean-blue:        #0066CC;   /* Ocean Blue       — primary, buttons, links */
+  --tropical-turquoise:#1A9AB0;   /* Tropical Turquoise — mid-tone bridge */
+  --sea-green:         #00A86B;   /* Sea Green        — science, data, research */
+  --crystal-blue:      #00E5FF;   /* Crystal Blue     — accent, CTAs, highlights */
+
+  /* Legacy aliases kept for backward compat with existing Tailwind classes */
+  --teal-bio:          #00E5FF;   /* → Crystal Blue */
+  --cyan-electric:     #1A9AB0;   /* → Tropical Turquoise */
+  --sea-surface:       #0066CC;   /* → Ocean Blue */
+  --sea-mid:           #0D2B6B;   /* → Deep Ocean Blue */
+  --ocean-black:       #080c12;
+  --ocean-deep:        #0a1628;
+  --sea-deep:          #071428;
+  --sea-abyss:         #030810;
 }
 
 html {
@@ -23,14 +31,13 @@ html {
 body {
   background: linear-gradient(
     to bottom,
-    #1e7db5 0%,
-    #1565a0 8%,
-    #0f4d88 18%,
-    #0a3872 30%,
-    #072858 45%,
-    #051c42 60%,
-    #040f2e 75%,
-    #020819 90%,
+    #0066CC 0%,
+    #1A9AB0 10%,
+    #0D2B6B 25%,
+    #091f54 40%,
+    #071428 60%,
+    #040f2e 78%,
+    #020819 92%,
     #010510 100%
   );
   background-attachment: fixed;
@@ -49,11 +56,11 @@ body::before {
   right: 0;
   bottom: 0;
   background:
-    linear-gradient(175deg, rgba(100,200,255,0.07) 0%, transparent 40%),
-    linear-gradient(168deg, rgba(80,180,255,0.05) 0%, transparent 35%),
-    linear-gradient(182deg, rgba(120,210,255,0.06) 0%, transparent 45%),
-    linear-gradient(172deg, rgba(60,170,255,0.04) 0%, transparent 38%),
-    linear-gradient(178deg, rgba(140,220,255,0.05) 0%, transparent 42%);
+    linear-gradient(175deg, rgba(0,229,255,0.07) 0%, transparent 40%),
+    linear-gradient(168deg, rgba(0,102,204,0.05) 0%, transparent 35%),
+    linear-gradient(182deg, rgba(26,154,176,0.06) 0%, transparent 45%),
+    linear-gradient(172deg, rgba(0,102,204,0.04) 0%, transparent 38%),
+    linear-gradient(178deg, rgba(0,229,255,0.05) 0%, transparent 42%);
   background-size: 100% 100%;
   pointer-events: none;
   z-index: 0;
@@ -69,9 +76,9 @@ body::after {
   right: 0;
   height: 35vh;
   background:
-    radial-gradient(ellipse 60% 30% at 25% 5%, rgba(150,230,255,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 20% at 70% 8%, rgba(120,210,255,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 25% at 50% 3%, rgba(180,240,255,0.05) 0%, transparent 80%);
+    radial-gradient(ellipse 60% 30% at 25% 5%, rgba(0,229,255,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 20% at 70% 8%, rgba(0,102,204,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 25% at 50% 3%, rgba(26,154,176,0.05) 0%, transparent 80%);
   pointer-events: none;
   z-index: 0;
   animation: caustics 8s ease-in-out infinite alternate;
@@ -100,16 +107,16 @@ h1, h2, h3, h4 {
 }
 
 .glow-teal {
-  text-shadow: 0 0 30px rgba(0, 212, 184, 0.6);
+  text-shadow: 0 0 30px rgba(0, 229, 255, 0.6);
 }
 
 .glow-border {
-  box-shadow: 0 0 0 1px rgba(0, 212, 184, 0.3),
-              0 0 20px rgba(0, 212, 184, 0.08);
+  box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.3),
+              0 0 20px rgba(0, 229, 255, 0.08);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #00d4b8 0%, #00b8d9 100%);
+  background: linear-gradient(135deg, #00E5FF 0%, #1A9AB0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -155,15 +155,18 @@ const briefs = [
 function OceanBackground() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-teal-bio/5 blur-[120px]" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full bg-cyan-electric/4 blur-[100px]" />
+      {/* Deep Ocean Blue ambient glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[120px]" style={{ backgroundColor: 'rgba(0, 229, 255, 0.05)' }} />
+      {/* Tropical Turquoise secondary glow */}
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full blur-[100px]" style={{ backgroundColor: 'rgba(26, 154, 176, 0.04)' }} />
       {/* Waveform decoration */}
       <svg className="absolute bottom-0 left-0 right-0 w-full opacity-10" viewBox="0 0 1440 120" preserveAspectRatio="none">
         <path d="M0,60 C240,20 480,100 720,60 C960,20 1200,100 1440,60 L1440,120 L0,120 Z" fill="url(#oceanGrad)" />
         <defs>
           <linearGradient id="oceanGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#00d4b8" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#00b8d9" stopOpacity="0.3" />
+            {/* Crystal Blue → Tropical Turquoise */}
+            <stop offset="0%" stopColor="#00E5FF" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#1A9AB0" stopOpacity="0.3" />
           </linearGradient>
         </defs>
       </svg>

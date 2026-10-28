@@ -66,6 +66,72 @@ export const metadata = {
 // ─── GA4 Measurement ID ────────────────────────────────────────────────────────
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-MNB4PKHG79'
 
+// ─── JSON-LD Structured Data ──────────────────────────────────────────────────
+const jsonLdOrganization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Dolphins Intuition',
+  url: 'https://dolphinsintuition.com',
+  logo: 'https://dolphinsintuition.com/logo.png',
+  description:
+    'AI-powered cetacean communication research using DolphinGemma and open science practices.',
+  foundingDate: '2025',
+  founder: {
+    '@type': 'Person',
+    name: 'Chris Ransford',
+  },
+  sameAs: [
+    'https://twitter.com/DolphinsIntuition',
+    'https://linkedin.com/company/dolphins-intuition',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    url: 'https://dolphinsintuition.com/contact',
+    contactType: 'Customer Service',
+  },
+}
+
+const jsonLdResearchProject = {
+  '@context': 'https://schema.org',
+  '@type': 'ResearchProject',
+  name: 'Dolphins Intuition',
+  description:
+    'Open-source research into cetacean communication using AI models, bioacoustics analysis, and peer-reviewed science.',
+  url: 'https://dolphinsintuition.com/research',
+  sponsor: {
+    '@type': 'Organization',
+    name: 'Dolphins Intuition',
+  },
+  keywords: ['dolphin communication', 'AI', 'cetacean research', 'DolphinGemma', 'bioacoustics'],
+  isAccessibleForFree: true,
+  license: 'https://creativecommons.org/licenses/by-sa/4.0/',
+}
+
+const jsonLdBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://dolphinsintuition.com',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Research',
+      item: 'https://dolphinsintuition.com/research',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'About',
+      item: 'https://dolphinsintuition.com/about',
+    },
+  ],
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -91,6 +157,23 @@ export default function RootLayout({ children }) {
           </>
         )}
 
+        {/* ── JSON-LD Structured Data ── */}
+        <Script id="json-ld-org" type="application/ld+json">
+          {JSON.stringify(jsonLdOrganization)}
+        </Script>
+        <Script id="json-ld-research" type="application/ld+json">
+          {JSON.stringify(jsonLdResearchProject)}
+        </Script>
+        <Script id="json-ld-breadcrumb" type="application/ld+json">
+          {JSON.stringify(jsonLdBreadcrumb)}
+        </Script>
+
+        {/* ── Preconnect for performance ── */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+        {/* ── Sitemap & RSS ── */}
+        <link rel="sitemap" href="https://dolphinsintuition.com/sitemap.xml" />
       </head>
       <body className="bg-ocean-black min-h-screen flex flex-col">
         <Nav />

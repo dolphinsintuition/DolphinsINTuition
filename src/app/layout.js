@@ -66,6 +66,10 @@ export const metadata = {
 // ─── GA4 Measurement ID ────────────────────────────────────────────────────────
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-MNB4PKHG79'
 
+// ─── Umami Analytics (Privacy-Friendly) ────────────────────────────────────────
+const UMAMI_WEBSITE_ID = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID || ''
+const UMAMI_SCRIPT_URL = process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL || 'https://analytics.umami.is/script.js'
+
 // ─── JSON-LD Structured Data ──────────────────────────────────────────────────
 const jsonLdOrganization = {
   '@context': 'https://schema.org',
@@ -157,6 +161,17 @@ export default function RootLayout({ children }) {
           </>
         )}
 
+        {/* ── Umami Analytics (Privacy-Friendly, No Cookies) ── */}
+        {UMAMI_WEBSITE_ID && (
+          <Script
+            src={UMAMI_SCRIPT_URL}
+            data-website-id={UMAMI_WEBSITE_ID}
+            strategy="afterInteractive"
+            async
+            defer
+          />
+        )}
+
         {/* ── JSON-LD Structured Data ── */}
         <Script id="json-ld-org" type="application/ld+json">
           {JSON.stringify(jsonLdOrganization)}
@@ -171,6 +186,9 @@ export default function RootLayout({ children }) {
         {/* ── Preconnect for performance ── */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {UMAMI_WEBSITE_ID && (
+          <link rel="preconnect" href="https://analytics.umami.is" />
+        )}
 
         {/* ── Sitemap & RSS ── */}
         <link rel="sitemap" href="https://dolphinsintuition.com/sitemap.xml" />

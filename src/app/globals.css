@@ -96,6 +96,29 @@ body::after {
   100% { opacity: 0.7; transform: scaleX(0.97); }
 }
 
+/* Enhanced wave animation — more dynamic, multi-layer */
+@keyframes wave {
+  0%, 100%   { transform: translateX(0) translateY(0); }
+  25%  { transform: translateX(-25px) translateY(-8px); }
+  50%  { transform: translateX(-50px) translateY(0); }
+  75%  { transform: translateX(-25px) translateY(8px); }
+}
+
+@keyframes wave-offset {
+  0%, 100%   { transform: translateX(0) translateY(0); }
+  25%  { transform: translateX(-20px) translateY(5px); }
+  50%  { transform: translateX(-40px) translateY(0); }
+  75%  { transform: translateX(-20px) translateY(-5px); }
+}
+
+/* Particle shimmer effect — subtle floating movement */
+@keyframes particle-shimmer {
+  0%, 100%   { opacity: 0.1; transform: translateY(0) translateX(0); }
+  25%  { opacity: 0.3; transform: translateY(-20px) translateX(10px); }
+  50%  { opacity: 0.15; transform: translateY(-40px) translateX(-10px); }
+  75%  { opacity: 0.25; transform: translateY(-20px) translateX(5px); }
+}
+
 /* Ensure all content sits above the beam layer */
 body > * {
   position: relative;
@@ -120,4 +143,18 @@ h1, h2, h3, h4 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Animation utilities for wave effects */
+.wave-animate {
+  animation: wave 6s ease-in-out infinite;
+}
+
+.wave-animate-offset {
+  animation: wave-offset 7s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.particle-shimmer {
+  animation: particle-shimmer 8s ease-in-out infinite;
 }

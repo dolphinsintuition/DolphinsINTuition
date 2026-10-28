@@ -2,15 +2,6 @@
 
 import { useState } from 'react'
 
-// NOTE: the NEXT_PUBLIC_SUPABASE_URL/ANON_KEY env vars in Cloudflare Pages
-// point at a stale/nonexistent project ref (qvnafubcoyqrycuomrzr — NXDOMAIN).
-// The real project is nxfjoqoilmfljlmtjdde ("dolphinsintuition's Project",
-// restored from paused 2026-07-31). Hardcoded here since these are public
-// browser-safe publishable values (same trust level as NEXT_PUBLIC_* vars)
-// and Cloudflare env vars couldn't be corrected without a fresh CF token.
-const SUPABASE_URL = 'https://nxfjoqoilmfljlmtjdde.supabase.co'
-const SUPABASE_ANON_KEY = 'sb_publishable_p5Lycaul_-c0QhektilJ7w_vQjRBQVI'
-
 export default function NewsletterForm({ className = '' }) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState('idle') // idle | loading | success | error
@@ -23,31 +14,27 @@ export default function NewsletterForm({ className = '' }) {
     setMessage('')
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
+      // Call server-side API route instead of Supabase directly
+      const res = await fetch('/api/subscribe', {
         method: 'POST',
-        headers: {
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': 'application/json',
-          Prefer: 'return=minimal',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       })
 
+      const data = await res.json()
+
       if (res.ok) {
         setStatus('success')
-        setMessage('Success! You are on the list.')
+        setMessage(data.message || 'Success! You are on the list.')
         setEmail('')
-      } else if (res.status === 409) {
-        setStatus('success')
-        setMessage("You're already subscribed.")
       } else {
         setStatus('error')
-        setMessage('Something went wrong. Please try again.')
+        setMessage(data.error || 'Something went wrong. Please try again.')
       }
-    } catch {
+    } catch (error) {
       setStatus('error')
       setMessage('Network error. Please try again.')
+      console.error('Newsletter subscription error:', error)
     }
   }
 

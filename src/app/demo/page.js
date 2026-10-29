@@ -1,10 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
 
-const HF_TOKEN  = process.env.NEXT_PUBLIC_HF_TOKEN
-const MODEL_ID  = 'openai/whisper-large-v3'
-const HF_URL    = `https://router.huggingface.co/hf-inference/models/${MODEL_ID}`
-
 export default function Demo() {
   const [file, setFile]         = useState(null)
   const [status, setStatus]     = useState('idle')
@@ -19,21 +15,18 @@ export default function Demo() {
     setErrorMsg('')
 
     try {
-      const audioBuffer = await file.arrayBuffer()
+      // Create FormData and send to server-side API route
+      const formData = new FormData()
+      formData.append('audio', file)
 
-      const response = await fetch(HF_URL, {
+      const response = await fetch('/api/analyse', {
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${HF_TOKEN}`,
-          'Content-Type': file.type || 'audio/wav',
-        },
-        body: audioBuffer,
+        body: formData,
       })
 
       if (!response.ok) {
         const err = await response.json().catch(() => ({}))
-        const loading = typeof err.error === 'string' && err.error.toLowerCase().includes('loading')
-        throw new Error(loading ? 'Model is warming up — try again in 30 seconds.' : (err.error || `HTTP ${response.status}`))
+        throw new Error(err.error || `HTTP ${response.status}`)
       }
 
       const data = await response.json()

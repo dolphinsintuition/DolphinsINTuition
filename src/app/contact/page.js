@@ -1,3 +1,7 @@
+'use client'
+
+import CollaborateForm from '@/components/CollaborateForm'
+
 export const metadata = {
   title: 'Contact | Dolphins Intuition',
   description:
@@ -40,8 +44,9 @@ export default function ContactPage() {
               icon: '◎',
               title: 'Research collaboration',
               body: 'Are you a researcher working on cetacean communication, acoustic AI, or related fields? We are interested in sharing tools, datasets, and findings with anyone doing serious work in this space.',
-              action: 'Discuss collaboration',
-              href: 'mailto:dolphins@chrisransford.com?subject=Research%20Collaboration',
+              action: 'Open form',
+              href: '#collaborate-form',
+              isForm: true,
             },
             {
               icon: '◈',
@@ -66,14 +71,36 @@ export default function ContactPage() {
                 </div>
                 <p className="text-white/60 text-sm leading-relaxed">{item.body}</p>
               </div>
-              <a
-                href={item.href}
-                className="shrink-0 px-6 py-2.5 border border-teal-bio/50 rounded-full text-teal-bio font-display text-sm tracking-wide hover:bg-teal-bio/10 transition-colors whitespace-nowrap"
-              >
-                {item.action} →
-              </a>
+              {item.isForm ? (
+                <a
+                  href={item.href}
+                  className="shrink-0 px-6 py-2.5 border border-teal-bio/50 rounded-full text-teal-bio font-display text-sm tracking-wide hover:bg-teal-bio/10 transition-colors whitespace-nowrap"
+                >
+                  {item.action} →
+                </a>
+              ) : (
+                <a
+                  href={item.href}
+                  className="shrink-0 px-6 py-2.5 border border-teal-bio/50 rounded-full text-teal-bio font-display text-sm tracking-wide hover:bg-teal-bio/10 transition-colors whitespace-nowrap"
+                >
+                  {item.action} →
+                </a>
+              )}
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── Collaboration Form ── */}
+      <section id="collaborate-form" className="px-6 py-20 max-w-2xl mx-auto">
+        <div className="glow-border rounded-2xl p-12 bg-ocean-deep">
+          <div className="mb-8">
+            <h2 className="font-display text-3xl font-bold text-white mb-3">Research Collaboration</h2>
+            <p className="text-white/60 text-sm leading-relaxed">
+              Tell us about your research, institution, and collaboration interests. We'll review your submission and be in touch within a few days.
+            </p>
+          </div>
+          <CollaborateForm />
         </div>
       </section>
 

@@ -12,6 +12,7 @@ import { useState, useEffect, useRef } from 'react'
  * - Keyboard navigation (arrow keys)
  * - Responsive layout (1 col mobile, 2 cols tablet, 3 cols desktop)
  * - Placeholder support for videos without thumbnails
+ * - Fully responsive iframes with proper aspect ratio
  */
 
 export default function YouTubeGallery({ 
@@ -88,65 +89,62 @@ export default function YouTubeGallery({
     onVideoSelect?.(video, index)
   }
 
-  const getColumnClass = () => {
-    return `grid-cols-${columns.mobile} md:grid-cols-${columns.tablet} lg:grid-cols-${columns.desktop}`
-  }
-
   return (
-    <div className="w-full bg-ocean-deep rounded-2xl overflow-hidden">
+    <div className="w-full max-w-6xl mx-auto bg-ocean-deep rounded-2xl overflow-hidden">
       {/* Featured Player */}
-      <div className="relative bg-black aspect-video mb-6">
-        <iframe
-          key={displayVideos[activeIndex]?.id}
-          width="100%"
-          height="100%"
-          src={`https://www.youtube.com/embed/${displayVideos[activeIndex]?.id}?autoplay=${isPlaying ? 1 : 0}&modestbranding=1&controls=1`}
-          title="Featured Video"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="absolute inset-0"
-        />
+      <div className="relative w-full bg-black">
+        {/* Container with locked 16:9 aspect ratio */}
+        <div className="relative w-full pb-[56.25%] h-0 overflow-hidden rounded-t-2xl">
+          <iframe
+            key={displayVideos[activeIndex]?.id}
+            src={`https://www.youtube.com/embed/${displayVideos[activeIndex]?.id}?autoplay=${isPlaying ? 1 : 0}&modestbranding=1&controls=1`}
+            title="Featured Video"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="absolute top-0 left-0 w-full h-full"
+          />
+        </div>
       </div>
 
       {/* Video Info */}
       {showTitles && (
-        <div className="px-6 pb-6">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
+        <div className="px-4 sm:px-6 py-4 sm:py-6">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1 min-w-0">
               <p className="text-teal-bio text-xs font-medium tracking-wider uppercase mb-2">
                 {displayVideos[activeIndex]?.category || 'Finn & Echo'}
               </p>
-              <h3 className="font-display text-xl font-bold text-white leading-snug mb-2">
+              <h3 className="font-display text-lg sm:text-xl font-bold text-white leading-snug mb-2 break-words">
                 {displayVideos[activeIndex]?.title}
               </h3>
-              <p className="text-white/50 text-sm leading-relaxed">
+              <p className="text-white/50 text-sm leading-relaxed line-clamp-3">
                 {displayVideos[activeIndex]?.description}
               </p>
             </div>
           </div>
 
           {/* Playback Controls */}
-          <div className="flex items-center gap-4 mt-4 pt-4 border-t border-white/10">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-4 pt-4 border-t border-white/10">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
-              className="px-4 py-2 bg-teal-bio/20 text-teal-bio rounded-full text-sm font-semibold hover:bg-teal-bio/40 transition-colors"
+              className="px-3 sm:px-4 py-2 bg-teal-bio/20 text-teal-bio rounded-full text-xs sm:text-sm font-semibold hover:bg-teal-bio/40 transition-colors whitespace-nowrap"
             >
               {isPlaying ? '⏸ Pause' : '▶ Play'}
             </button>
             <button
               onClick={() => setActiveIndex((i) => (i - 1 + displayVideos.length) % displayVideos.length)}
-              className="px-4 py-2 border border-white/20 text-white/60 rounded-full text-sm hover:border-white/40 hover:text-white/80 transition-colors"
+              className="px-3 sm:px-4 py-2 border border-white/20 text-white/60 rounded-full text-xs sm:text-sm hover:border-white/40 hover:text-white/80 transition-colors whitespace-nowrap"
             >
               ← Prev
             </button>
             <button
               onClick={() => setActiveIndex((i) => (i + 1) % displayVideos.length)}
-              className="px-4 py-2 border border-white/20 text-white/60 rounded-full text-sm hover:border-white/40 hover:text-white/80 transition-colors"
+              className="px-3 sm:px-4 py-2 border border-white/20 text-white/60 rounded-full text-xs sm:text-sm hover:border-white/40 hover:text-white/80 transition-colors whitespace-nowrap"
             >
               Next →
             </button>
-            <span className="ml-auto text-white/40 text-sm">
+            <span className="ml-auto text-white/40 text-xs sm:text-sm whitespace-nowrap">
               {activeIndex + 1} / {displayVideos.length}
             </span>
           </div>
@@ -154,11 +152,11 @@ export default function YouTubeGallery({
       )}
 
       {/* Gallery Grid */}
-      <div className="px-6 pb-6 border-t border-white/10">
+      <div className="px-4 sm:px-6 py-4 sm:py-6 border-t border-white/10">
         <p className="text-white/50 text-xs font-medium tracking-wider uppercase mb-4">All Videos</p>
         <div
           ref={containerRef}
-          className={`grid gap-4 ${getColumnClass()}`}
+          className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
         >
           {displayVideos.map((video, index) => (
             <div
@@ -173,19 +171,19 @@ export default function YouTubeGallery({
                   : 'ring-1 ring-white/10 hover:ring-white/30'
               }`}
             >
-              {/* Thumbnail */}
-              <div className="relative bg-black aspect-video overflow-hidden">
+              {/* Thumbnail Container */}
+              <div className="relative w-full pb-[56.25%] h-0 overflow-hidden bg-black">
                 <img
                   src={video.thumbnail || `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
                   alt={video.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  className="absolute top-0 left-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors" />
 
                 {/* Play Icon Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
+                  <div className={`w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center transition-all text-sm sm:text-base ${
                     index === activeIndex
                       ? 'bg-teal-bio text-ocean-black'
                       : 'bg-white/20 text-white group-hover:bg-teal-bio group-hover:text-ocean-black'
@@ -203,7 +201,7 @@ export default function YouTubeGallery({
               )}
 
               {/* Title on Hover */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-3 translate-y-full group-hover:translate-y-0 transition-transform">
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-2 sm:p-3 translate-y-full group-hover:translate-y-0 transition-transform">
                 <p className="text-white text-xs font-semibold leading-tight line-clamp-2">
                   {video.title}
                 </p>
@@ -214,7 +212,7 @@ export default function YouTubeGallery({
       </div>
 
       {/* Keyboard Hint */}
-      <div className="px-6 py-3 bg-ocean-mid/50 text-white/40 text-xs text-center">
+      <div className="px-4 sm:px-6 py-3 bg-ocean-mid/50 text-white/40 text-xs text-center">
         💡 Use arrow keys to navigate • Click to select • Videos autoplay sequentially
       </div>
     </div>

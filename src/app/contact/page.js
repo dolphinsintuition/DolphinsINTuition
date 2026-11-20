@@ -2,12 +2,6 @@
 
 import CollaborateForm from '@/components/CollaborateForm'
 
-export const metadata = {
-  title: 'Contact | Dolphins Intuition',
-  description:
-    'Get in touch with the Dolphins Intuition project — field recordings, research collaboration, or general enquiries.',
-};
-
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-ocean-black text-white">

@@ -55,7 +55,7 @@ export async function POST(request) {
 
     if (res.ok) {
       return Response.json(
-        { success: true, message: 'Thank you! We've received your collaboration inquiry and will be in touch.' },
+        { success: true, message: "Thank you! We've received your collaboration inquiry and will be in touch." },
         { status: 200 }
       )
     } else {

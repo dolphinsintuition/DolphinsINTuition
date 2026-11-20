@@ -236,7 +236,7 @@ function getMockVideos() {
     {
       id: 'jNQXAC9IVRw', // Placeholder ID
       title: 'The Science Behind Signature Whistles',
-      description: 'Dolphins use individually unique whistles as names. Here is what 40 years of research tells us.',
+      description: "Dolphins use individually unique whistles as names. Here is what 40 years of research tells us.",
       category: 'Research',
       thumbnail: null,
       duration: '12:34'
@@ -244,7 +244,7 @@ function getMockVideos() {
     {
       id: '9bZkp7q19f0', // Placeholder ID
       title: 'DolphinGemma: AI Meets Cetacean Science',
-      description: 'Google DeepMind's new model can classify dolphin vocalizations with unprecedented accuracy. What it means.',
+      description: "Google DeepMind's new model can classify dolphin vocalizations with unprecedented accuracy. What it means.",
       category: 'AI Models',
       thumbnail: null,
       duration: '8:45'

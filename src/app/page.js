@@ -82,9 +82,6 @@ export default function Home() {
           sequential={true}
           showTitles={true}
           columns={{ mobile: 1, tablet: 2, desktop: 3 }}
-          onVideoSelect={(video, index) => {
-            console.log(`Selected video ${index + 1}: ${video.title}`)
-          }}
         />
       </section>
 

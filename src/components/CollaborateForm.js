@@ -16,10 +16,12 @@ export default function CollaborateForm() {
 
   function handleChange(e) {
     const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
+    setFormData((prev) => (
+      {
+        ...prev,
+        [name]: value,
+      }
+    ))
   }
 
   async function handleSubmit(e) {
@@ -54,7 +56,7 @@ export default function CollaborateForm() {
 
       if (res.ok) {
         setStatus('success')
-        setMessage(data.message || 'Thank you! We'll review your submission and be in touch.')
+        setMessage(data.message || "Thank you! We'll review your submission and be in touch.")
         setFormData({
           name: '',
           email: '',

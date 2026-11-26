@@ -1,5 +1,4 @@
 // /api/subscribe — server-side newsletter subscription handler
-// Integrates with Kit/ConvertKit V3 API for subscriber management + welcome sequence
 // Credentials kept server-side only; no exposure to client
 
 export async function POST(request) {
@@ -14,60 +13,53 @@ export async function POST(request) {
       )
     }
 
-    // Get Kit API key from server-side environment
-    // This is NOT exposed to the browser
-    const KIT_API_KEY = process.env.KIT_API_KEY
+    // Get Supabase URL and key from server-side env vars
+    // These are NOT exposed to the browser
+    const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://nxfjoqoilmfljlmtjdde.supabase.co'
+    const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_KEY
 
-    if (!KIT_API_KEY) {
-      console.error('Kit API key missing from environment')
+    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+      console.error('Supabase credentials missing from environment')
       return Response.json(
         { error: 'Server configuration error' },
         { status: 500 }
       )
     }
 
-    // POST to Kit V3 API to add subscriber
-    // Docs: https://app.kit.com/mcp
-    // This endpoint automatically:
-    // - Creates subscriber if new
-    // - Updates if already exists
-    // - Triggers welcome sequence (configured in Kit UI)
-    const res = await fetch('https://api.kit.com/v3/subscribers', {
+    // POST to Supabase from the server (not the browser)
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/newsletter_subscribers`, {
       method: 'POST',
       headers: {
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
         'Content-Type': 'application/json',
-        'X-Kit-Api-Key': KIT_API_KEY,
+        Prefer: 'return=minimal',
       },
-      body: JSON.stringify({
-        email_address: email,
-        // Kit automations are triggered based on form ID or tag assignment
-        // The welcome sequence is configured in Kit UI and fires on new subscriber
-      }),
+      body: JSON.stringify({ email }),
     })
 
     if (res.ok) {
       return Response.json(
-        { success: true, message: 'Subscribed! Check your email for the welcome message.' },
+        { success: true, message: 'Subscribed successfully' },
         { status: 200 }
       )
     } else if (res.status === 409) {
-      // Subscriber already exists in Kit
+      // Duplicate email
       return Response.json(
-        { success: true, message: 'You\'re already on our list!' },
+        { success: true, message: 'Already subscribed' },
         { status: 200 }
       )
     } else {
-      const errorData = await res.text()
-      console.error(`Kit API error: ${res.status}`, errorData)
+      console.error(`Supabase error: ${res.status}`, await res.text())
       return Response.json(
-        { error: 'Subscription failed. Please try again.' },
+        { error: 'Subscription failed' },
         { status: 500 }
       )
     }
   } catch (error) {
     console.error('Subscribe API error:', error)
     return Response.json(
-      { error: 'Server error. Please try again.' },
+      { error: 'Server error' },
       { status: 500 }
     )
   }

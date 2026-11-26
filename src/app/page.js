@@ -1,8 +1,5 @@
 import Link from 'next/link'
 import NewsletterForm from '../components/NewsletterForm'
-import CharacterIntro from '../components/CharacterIntro'
-import YouTubeGallery from '../components/YouTubeGallery'
-import ProofOfWork from '../components/ProofOfWork'
 
 export default function Home() {
   return (
@@ -60,33 +57,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
-      {/* Finn & Echo Character Intro */}
-      <CharacterIntro />
-
-      {/* YouTube Gallery — Finn & Echo + Featured Research Videos */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
-        <div className="mb-10">
-          <p className="text-teal-bio text-xs font-medium tracking-[0.2em] uppercase mb-2">Video Library</p>
-          <div className="flex items-end justify-between">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">Finn, Echo & the Research</h2>
-            <p className="text-white/40 text-sm hidden md:block">Sequential autoplay • Arrow keys to navigate • Click to select</p>
-          </div>
-          <p className="text-white/50 text-sm md:text-base leading-relaxed mt-4 max-w-2xl">
-            Meet Finn and Echo — AI-driven characters exploring dolphin intelligence.
-            Plus deep-dive research videos on signature whistles, AI models, field work, and what the science actually shows.
-          </p>
-        </div>
-        <YouTubeGallery
-          autoplay={true}
-          sequential={true}
-          showTitles={true}
-          columns={{ mobile: 1, tablet: 2, desktop: 3 }}
-        />
-      </section>
-
-      {/* Proof of Work — Pipeline visualization & metrics */}
-      <ProofOfWork />
 
       {/* Featured research briefs */}
       <section className="max-w-6xl mx-auto px-6 py-20">
@@ -204,10 +174,12 @@ function OceanBackground() {
         <path d="M0,70 C240,30 480,110 720,70 C960,30 1200,110 1440,70 L1440,120 L0,120 Z" fill="url(#oceanGrad2)" className="wave-animate-offset" opacity="0.5" />
         <defs>
           <linearGradient id="oceanGrad" x1="0" y1="0" x2="1" y2="0">
+            {/* Crystal Blue → Tropical Turquoise */}
             <stop offset="0%" stopColor="#00E5FF" stopOpacity="0.3" />
             <stop offset="100%" stopColor="#1A9AB0" stopOpacity="0.3" />
           </linearGradient>
           <linearGradient id="oceanGrad2" x1="0" y1="0" x2="1" y2="0">
+            {/* Tropical Turquoise → Ocean Blue */}
             <stop offset="0%" stopColor="#1A9AB0" stopOpacity="0.2" />
             <stop offset="100%" stopColor="#0066CC" stopOpacity="0.2" />
           </linearGradient>

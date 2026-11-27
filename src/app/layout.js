@@ -11,7 +11,7 @@ export const metadata = {
     template: '%s | Dolphins Intuition',
   },
   description:
-    'Using AI and DolphinGemma to decode dolphin vocalizations. Explore cetacean communication research, upload recordings, and join the open science community.',
+    'Using AI and DolphinGemma to analyse dolphin vocalizations. Explore cetacean communication research, upload recordings, and join the open science community.',
   keywords: [
     'dolphin communication',
     'dolphin AI',
@@ -38,7 +38,7 @@ export const metadata = {
   openGraph: {
     title: 'Dolphins Intuition — Listening at the Edge of Language',
     description:
-      'AI-powered cetacean communication research. Decode dolphin vocalizations with DolphinGemma.',
+      'AI-powered cetacean communication research. Analyse dolphin vocalizations with DolphinGemma.',
     url: 'https://dolphinsintuition.com',
     siteName: 'Dolphins Intuition',
     locale: 'en_US',

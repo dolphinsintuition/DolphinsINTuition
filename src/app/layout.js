@@ -11,7 +11,7 @@ export const metadata = {
     template: '%s | Dolphins Intuition',
   },
   description:
-    'Using AI and DolphinGemma to analyse dolphin vocalizations. Explore cetacean communication research, upload recordings, and join the open science community.',
+    'We track the science of dolphin communication, from signature whistles to AI models like DolphinGemma. Interaction, not translation.',
   keywords: [
     'dolphin communication',
     'dolphin AI',
@@ -38,7 +38,7 @@ export const metadata = {
   openGraph: {
     title: 'Dolphins Intuition — Listening at the Edge of Language',
     description:
-      'AI-powered cetacean communication research. Analyse dolphin vocalizations with DolphinGemma.',
+      'Following the science of dolphin communication, including new AI models. Interaction, not translation.',
     url: 'https://dolphinsintuition.com',
     siteName: 'Dolphins Intuition',
     locale: 'en_US',
@@ -78,7 +78,7 @@ const jsonLdOrganization = {
   url: 'https://dolphinsintuition.com',
   logo: 'https://dolphinsintuition.com/logo.png',
   description:
-    'AI-powered cetacean communication research using DolphinGemma and open science practices.',
+    'An independent project tracking cetacean communication research, including AI models like DolphinGemma.',
   foundingDate: '2025',
   founder: {
     '@type': 'Person',
